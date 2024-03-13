@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
 
     <div class="pagina-inicial">
@@ -41,21 +42,26 @@
                     <div class="cards">
                         <h2 class="cards__titulo">Choose what class u wanna see</h2>
                         <ul class="cards__lista">
+                            {% if cards %}
+                            {% for set_image in cards %}
                             <li class="card">
                                 <a href="{% url 'imagem' %}">
-                                    <img class="card__imagem" src="{% static 'assets/imagens/galeria/Hubble-Pillars-of-Creation.png' %}" alt="foto">
+                                    <img class="card__imagem" src="{% static 'assets/imagens/galeria/'%}{{ set_image.img }}" alt="foto">
                                 </a>
-                                <span class="card__tag">Type</span>
+                                <span class="card__tag">Tank</span>
                                 <div class="card__info">
-                                    <p class="card__titulo">Class</p>
+                                    <p class="card__titulo">{{ set_image.name }}</p>
                                     <div class="card__texto">
-                                        <p class="card__descricao">Text/Text/Text</p>
+                                        <p class="card__descricao">{{ set_image.caption }}</p>
                                         <span>
                                             <img src="{% static 'assets/ícones/1x/favorite_outline.png' %}" alt="ícone de coração">
                                         </span>
                                     </div>
                                 </div>
                             </li>
+                            {% endfor %}
+                            {% else %}
+                            {% endif %}
                         </ul>
                     </div>
                 </section>
