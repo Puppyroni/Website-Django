@@ -3,9 +3,9 @@ from galeria.models import Image
 
 def index(request):
     
-    set_image = Image.objects.all()
+    set_image = Image.objects.filter(published = True)
     
-    return render(request, 'index.html', {'cards': set_image})
+    return render(request, 'galeria/index.html', {'cards': set_image})
 
 def imagem_page(request):
-    return render(request, 'imagem.html')
+    return render(request, 'galeria/imagem.html')

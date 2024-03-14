@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'galeria/base.html' %}
 {% load static %}
 
 
@@ -15,14 +15,9 @@
             </div>
         </header>
         <main class="principal">
-            <section class="menu-lateral">
-                <nav class="menu-lateral__navegacao">
-                    <a href="#"><img src="{% static 'assets/ícones/1x/Home - ativo.png' %}"> Home</a>
-                    <a href="#"><img src="{% static 'assets/ícones/1x/Mais vistas - inativo.png' %}"> BigBang</a>
-                    <a href="#"><img src="{% static 'assets/ícones/1x/Novas - inativo.png' %}"> Space</a>
-                    <a href="#"><img src="{% static 'assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Galaxy</a>
-                </nav>
-            </section>
+
+            {% include 'utilizadores/partials/menu-lateral.html' %}
+
             <section class="conteudo">
                 <section class="banner">
                     <img class="banner__imagem" src="{% static 'assets/imagens/warrior.jpg' %}" alt="banner Alura Space">
@@ -42,13 +37,15 @@
                     <div class="cards">
                         <h2 class="cards__titulo">Choose what class u wanna see</h2>
                         <ul class="cards__lista">
+
                             {% if cards %}
                             {% for set_image in cards %}
+
                             <li class="card">
                                 <a href="{% url 'imagem' %}">
                                     <img class="card__imagem" src="{% static 'assets/imagens/galeria/'%}{{ set_image.img }}" alt="foto">
                                 </a>
-                                <span class="card__tag">Tank</span>
+                                <span class="card__tag">{{ set_image.category }}</span>
                                 <div class="card__info">
                                     <p class="card__titulo">{{ set_image.name }}</p>
                                     <div class="card__texto">
@@ -59,9 +56,11 @@
                                     </div>
                                 </div>
                             </li>
+
                             {% endfor %}
                             {% else %}
                             {% endif %}
+
                         </ul>
                     </div>
                 </section>
@@ -69,5 +68,5 @@
         </main>
     </div>
 
-    {% include 'partials/_footer.html' %}
+    {% include 'galeria/partials/_footer.html' %}
 {% endblock %}
